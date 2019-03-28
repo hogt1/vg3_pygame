@@ -12,6 +12,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 surface = pygame.Surface(screen.get_size())
 surface.convert()
 
+ballon_1 = pygame.image.load('resources/baloon_1.png')
+ballon_1.convert()
 
 while True:
     pygame.event.pump()
@@ -22,5 +24,5 @@ while True:
     surface.fill((255, 255, 255))
     screen.blit(surface, (0,0))
 
-    #pygame.display.flip()
+    pygame.display.flip()
     pygame.display.update()
