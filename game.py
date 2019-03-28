@@ -24,7 +24,17 @@ ballon_1.convert()
 ballon_1_fit_rect = ballon_1.get_rect().fit(object_rect)
 print(ballon_1_fit_rect.size)
 
+
+step = 3
+dir = 1
+x = 0
+
 while True:
+    x += step*dir
+    if x >= surface.get_rect().width - ballon_1_fit_rect.width:
+        dir = -1
+    elif x <= 0:
+        dir = 1 
     pygame.event.pump()
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -32,6 +42,6 @@ while True:
             sys.exit()
     surface.fill((255, 255, 255))
     screen.blit(surface, (0,0))
-    screen.blit(pygame.transform.smoothscale(ballon_1, ballon_1_fit_rect.size), (100,100))
+    screen.blit(pygame.transform.smoothscale(ballon_1, ballon_1_fit_rect.size), (x,100))
     pygame.display.flip()
     pygame.display.update()
