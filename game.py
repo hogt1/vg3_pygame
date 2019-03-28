@@ -14,7 +14,10 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 surface = pygame.Surface(screen.get_size())
 surface.convert()
 
-ballon_1 = HotAirBalloon(screen, surface)
+balloons = []
+for n in range(10):
+    balloons.append(HotAirBalloon(screen, surface))
+
 
 while True:
     pygame.event.pump()
@@ -24,6 +27,7 @@ while True:
             sys.exit()
     surface.fill((255, 255, 255))
     screen.blit(surface, (0,0))
-    ballon_1.draw()
+    for balloon in balloons:
+        balloon.draw()
     pygame.display.flip()
     pygame.display.update()
