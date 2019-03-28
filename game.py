@@ -15,7 +15,7 @@ surface = pygame.Surface(screen.get_size())
 surface.convert()
 
 balloons = []
-for n in range(10):
+for n in range(1):
     balloons.append(HotAirBalloon(screen, surface))
 
 
