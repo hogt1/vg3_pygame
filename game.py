@@ -1,3 +1,4 @@
+import os
 import sys
 import pygame
 from pygame.locals import *
@@ -12,7 +13,9 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 surface = pygame.Surface(screen.get_size())
 surface.convert()
 
-ballon_1 = pygame.image.load('resources/baloon_1.png')
+filename = os.path.join('resources', 'ballon_1.png')
+print(filename)
+ballon_1 = pygame.image.load(filename)
 ballon_1.convert()
 
 while True:
@@ -23,6 +26,7 @@ while True:
             sys.exit()
     surface.fill((255, 255, 255))
     screen.blit(surface, (0,0))
+    screen.blit(ballon_1, (0,0))
 
     pygame.display.flip()
     pygame.display.update()
