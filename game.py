@@ -2,7 +2,7 @@ import os
 import sys
 import pygame
 from pygame.locals import *
-from game_objects import HotAirBalloon, Cannonball
+from game_objects import HotAirBalloon, Cannonball, Mine
 
 pygame.init()
 pygame.font.init() # Initaliserer fonter
@@ -32,6 +32,9 @@ cannonballs = []
 for n in range(1):
     cannonballs.append(Cannonball(surface))
 
+mines = []
+for n in range(10):
+    mines.append(Mine(surface))
 
 while True:
     pygame.event.pump()
@@ -60,6 +63,9 @@ while True:
             
     surface.fill((255, 255, 255))
     surface.blit(background, (0,0))
+    for mine in mines:
+        mine.draw()
+        
     for balloon in balloons:
         balloon.draw()
 

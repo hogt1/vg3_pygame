@@ -15,9 +15,17 @@ HOTAIR_BALLON_SIZE = (100,100)
 CANNONBALL_FILE = 'cannonball.png'
 CANNONBALL_SIZE = (20, 20)
 
+MINE_FILE = 'mine.png'
+MINE_SIZE = (50, 50)
 
-class HotAirBalloon:
+
+class BaseObject(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+
+class HotAirBalloon(BaseObject):
     def __init__(self,surface):
+        BaseObject.__init__(self)
         self.surface = surface
         self.MIN_SPEED = 3
         self.MAX_SPEED = 10
@@ -86,8 +94,9 @@ class HotAirBalloon:
                 (self.rect.left,self.rect.top-20))
 
 
-class Cannonball:
+class Cannonball(BaseObject):
     def __init__(self,surface):
+        BaseObject.__init__(self)
         self.surface = surface
         filename = os.path.join(RESOURCE_DIR, CANNONBALL_FILE)
         self.image = load_image(filename, CANNONBALL_SIZE)
@@ -104,6 +113,25 @@ class Cannonball:
         if (self.rect.top > self.surface.get_rect().bottom):
             self.rect.left = random.randint(0, self.surface.get_rect().width - self.rect.width)
             self.rect.top = -self.rect.height
+
+    def draw(self):
+        self.update()
+        self.surface.blit(self.image, self.rect.topleft)
+
+class Mine(BaseObject):
+    def __init__(self,surface):
+        BaseObject.__init__(self)
+        self.surface = surface
+        filename = os.path.join(RESOURCE_DIR, MINE_FILE)
+        self.image = load_image(filename, MINE_SIZE)
+        self.rect = self.image.get_rect()
+        
+        # Starter random på toppen utenfor skjermen
+        self.rect.left = random.randint(0, self.surface.get_rect().width - self.rect.width)
+        self.rect.top = random.randint(0, self.surface.get_rect().height - self.rect.height)
+    
+    def update(self):
+        pass
 
     def draw(self):
         self.update()
