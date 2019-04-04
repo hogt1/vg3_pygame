@@ -1,23 +1,28 @@
 import os
 import sys
+import random
 import pygame
 from pygame.locals import *
-from game_objects import HotAirBalloon
+import settings
+from sprites import HotAirBalloon
 
 pygame.init()
 pygame.font.init() # Initaliserer fonter
+clock = pygame.time.Clock()
 
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
+
 
 #screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE) 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) 
+screen = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT)) 
 surface = pygame.Surface(screen.get_size())
 surface.convert()
 
 balloons = []
-for n in range(1):
-    balloons.append(HotAirBalloon(surface))
+for n in range(10):
+    speed = random.randint(settings.HOTAIR_BALLON_MIN_SPEED,settings.HOTAIR_BALLON_MAX_SPEED)
+    # Starter i tilfeldig retning
+    direction = random.randint(-180, 180)
+    balloons.append(HotAirBalloon(speed, direction))
 
 
 while True:
@@ -47,7 +52,8 @@ while True:
             
     surface.fill((255, 255, 255))
     for balloon in balloons:
-        balloon.draw()
+        balloon.draw(surface)
     screen.blit(surface, (0,0))
     pygame.display.flip()
     pygame.display.update()
+    clock.tick(settings.FPS)
