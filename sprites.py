@@ -23,7 +23,7 @@ class BaseObject(pygame.sprite.Sprite):
         y = math.sin(rad) * self.speed
         return x, y
     
-    def set_direction_xy(x, y):
+    def set_direction_xy(self, x, y):
         rad = math.atan2(y/self.speed, x/self.speed) # Vinkel i radianer
         self.direction = math.degrees(rad) # Kalkulerer om radianer til grader
 
