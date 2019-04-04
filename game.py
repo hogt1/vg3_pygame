@@ -33,8 +33,11 @@ while True:
             pygame.quit()
             sys.exit()
         elif event.type == KEYDOWN:
-            if event.key == K_PLUS: # + Oppretter en ny ballong
-                balloons.append(HotAirBalloon(surface))
+            if event.key == K_p: # + Oppretter en ny ballong
+                speed = random.randint(settings.HOTAIR_BALLON_MIN_SPEED,settings.HOTAIR_BALLON_MAX_SPEED)
+                # Starter i tilfeldig retning
+                direction = random.randint(-180, 180)
+                balloons.append(HotAirBalloon(speed, direction))
             elif event.key == K_UP:
                 for ballon in balloons:
                     ballon.speed += 1
